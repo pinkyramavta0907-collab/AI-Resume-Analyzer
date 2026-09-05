@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Analysis Result</title>
+    <title>Analysis Result - AI Resume Analyzer</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -22,11 +22,15 @@
     <div class="navbar">
 
         <div class="logo">
-            AI Resume Analyzer
+            🤖 AI Resume Analyzer
         </div>
 
         <a href="{{ url_for('home') }}">
             Analyze Again
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
         </a>
 
     </div>
@@ -36,126 +40,175 @@
 
 <main class="container">
 
-    <h1>Resume Analysis</h1>
+    <section class="hero">
 
-    <p>
-        Resume:
-        <strong>{{ filename }}</strong>
-    </p>
-
-
-    <section class="score-card">
-
-        <h2>Match Score</h2>
-
-        <div class="score">
-            {{ match_percentage }}%
+        <div class="hero-badge">
+            📊 Resume Analysis Complete
         </div>
 
-        {% if match_percentage >= 75 %}
+        <h1>
+            Resume Analysis
+        </h1>
 
-            <p>
-                Strong skill match.
-            </p>
-
-        {% elif match_percentage >= 50 %}
-
-            <p>
-                Good match. Some skills can be improved.
-            </p>
-
-        {% else %}
-
-            <p>
-                Several required skills are missing.
-            </p>
-
-        {% endif %}
+        <p>
+            Here is the comparison between your resume and the job description.
+        </p>
 
     </section>
 
 
-    <div class="grid">
+    <section class="result-card">
 
-        <section class="card">
+        <div class="resume-name">
+            📄 Resume:
+            <strong>{{ filename }}</strong>
+        </div>
 
-            <h2>Matching Skills</h2>
+
+        <div class="score-section">
+
+            <h2>🎯 Match Score</h2>
+
+            <div class="match-score">
+                {{ match_percentage }}%
+            </div>
+
+            {% if match_percentage >= 75 %}
+
+                <div class="score-message success">
+                    🎉 Excellent match! Your skills strongly align with this job.
+                </div>
+
+            {% elif match_percentage >= 50 %}
+
+                <div class="score-message warning">
+                    👍 Good match! A few additional skills could improve your profile.
+                </div>
+
+            {% else %}
+
+                <div class="score-message danger">
+                    ⚠️ Several required skills are missing.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="result-section">
+
+            <h2>✅ Matching Skills</h2>
 
             {% if matching_skills %}
 
-                <ul>
+                <div class="skills">
 
                     {% for skill in matching_skills %}
 
-                        <li>{{ skill }}</li>
+                        <span class="skill matching">
+                            {{ skill }}
+                        </span>
 
                     {% endfor %}
 
-                </ul>
+                </div>
 
             {% else %}
 
-                <p>No matching skills found.</p>
+                <p class="empty-message">
+                    No matching skills found.
+                </p>
 
             {% endif %}
 
-        </section>
+        </div>
 
 
-        <section class="card">
+        <div class="result-section">
 
-            <h2>Missing Skills</h2>
+            <h2>❌ Missing Skills</h2>
 
             {% if missing_skills %}
 
-                <ul>
+                <div class="skills">
 
                     {% for skill in missing_skills %}
 
-                        <li>{{ skill }}</li>
+                        <span class="skill missing">
+                            {{ skill }}
+                        </span>
 
                     {% endfor %}
 
-                </ul>
+                </div>
 
             {% else %}
 
-                <p>No missing skills detected.</p>
+                <p class="empty-message">
+                    No missing skills detected.
+                </p>
 
             {% endif %}
 
-        </section>
-
-    </div>
+        </div>
 
 
-    <section class="card">
+        <div class="result-section">
 
-        <h2>Skills Found in Resume</h2>
+            <h2>💡 Skills Found in Resume</h2>
 
-        <div class="skills">
+            {% if resume_skills %}
 
-            {% for skill in resume_skills %}
+                <div class="skills">
 
-                <span>
-                    {{ skill }}
-                </span>
+                    {% for skill in resume_skills %}
 
-            {% endfor %}
+                        <span class="skill">
+                            {{ skill }}
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p class="empty-message">
+                    No technical skills detected.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="action-buttons">
+
+            <a href="{{ url_for('home') }}"
+               class="primary-button">
+                🔄 Analyze Another Resume
+            </a>
+
+            <a href="{{ url_for('dashboard') }}"
+               class="secondary-button">
+                📊 View Dashboard
+            </a>
 
         </div>
 
     </section>
 
-
-    <a class="button-link"
-       href="{{ url_for('home') }}">
-
-        Analyze Another Resume
-
-    </a>
-
 </main>
+
+
+<footer>
+
+    <p>
+        AI Resume Analyzer • Built with Python & Flask
+    </p>
+
+</footer>
 
 </body>
 

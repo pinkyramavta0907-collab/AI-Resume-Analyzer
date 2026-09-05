@@ -22,7 +22,7 @@
     <div class="navbar">
 
         <div class="logo">
-            AI Resume Analyzer
+            🤖 AI Resume Analyzer
         </div>
 
         <a href="{{ url_for('dashboard') }}">
@@ -38,13 +38,18 @@
 
     <section class="hero">
 
+        <div class="hero-badge">
+            ✨ Smart Resume Analysis
+        </div>
+
         <h1>
-            AI Resume Analyzer & Job Matcher
+            AI Resume Analyzer
+            <span>& Job Matcher</span>
         </h1>
 
         <p>
-            Analyze your resume and compare your skills
-            with a job description.
+            Analyze your resume, discover your skills,
+            and compare them with job requirements.
         </p>
 
     </section>
@@ -55,7 +60,7 @@
         {% for message in messages %}
 
             <div class="alert">
-                {{ message }}
+                ⚠️ {{ message }}
             </div>
 
         {% endfor %}
@@ -65,47 +70,113 @@
 
     <section class="card">
 
+        <div class="card-header">
+
+            <h2>📄 Analyze Your Resume</h2>
+
+            <p>
+                Upload your resume and paste the job description
+                to check your skill compatibility.
+            </p>
+
+        </div>
+
+
         <form action="{{ url_for('analyze') }}"
               method="POST"
               enctype="multipart/form-data">
 
-            <label>
-                Upload Your Resume
-            </label>
 
-            <input
-                type="file"
-                name="resume"
-                accept=".pdf,.docx"
-                required
-            >
+            <div class="form-group">
 
-            <small>
-                PDF or DOCX only
-            </small>
+                <label>
+                    Upload Your Resume
+                </label>
+
+                <input
+                    type="file"
+                    name="resume"
+                    accept=".pdf,.docx"
+                    required
+                >
+
+                <small>
+                    Supported formats: PDF or DOCX • Maximum size: 5 MB
+                </small>
+
+            </div>
 
 
-            <label>
-                Job Description
-            </label>
+            <div class="form-group">
 
-            <textarea
-                name="job_description"
-                rows="10"
-                placeholder="Paste the job description here..."
-                required
-            ></textarea>
+                <label>
+                    Job Description
+                </label>
+
+                <textarea
+                    name="job_description"
+                    rows="10"
+                    placeholder="Paste the job description here..."
+                    required
+                ></textarea>
+
+                <small>
+                    Include the skills and requirements mentioned in the job posting.
+                </small>
+
+            </div>
 
 
             <button type="submit">
-                Analyze Resume
+                🚀 Analyze Resume
             </button>
 
         </form>
 
     </section>
 
+
+    <section class="features">
+
+        <div class="feature-card">
+            <div class="feature-icon">📄</div>
+            <h3>Resume Analysis</h3>
+            <p>
+                Extract important technical skills from your resume.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Skill Matching</h3>
+            <p>
+                Compare your skills with the job requirements.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Match Score</h3>
+            <p>
+                Get a clear percentage showing your skill match.
+            </p>
+        </div>
+
+    </section>
+
 </main>
+
+
+<footer>
+
+    <p>
+        AI Resume Analyzer • Built with Python & Flask
+    </p>
+
+</footer>
+
 
 </body>
 
