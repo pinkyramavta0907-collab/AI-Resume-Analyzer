@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="navbar">
+
+        <div class="logo">
+            AI Resume Analyzer
+        </div>
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+
+        <h1>
+            AI Resume Analyzer & Job Matcher
+        </h1>
+
+        <p>
+            Analyze your resume and compare your skills
+            with a job description.
+        </p>
+
+    </section>
+
+
+    {% with messages = get_flashed_messages() %}
+
+        {% for message in messages %}
+
+            <div class="alert">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endwith %}
+
+
+    <section class="card">
+
+        <form action="{{ url_for('analyze') }}"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <label>
+                Upload Your Resume
+            </label>
+
+            <input
+                type="file"
+                name="resume"
+                accept=".pdf,.docx"
+                required
+            >
+
+            <small>
+                PDF or DOCX only
+            </small>
+
+
+            <label>
+                Job Description
+            </label>
+
+            <textarea
+                name="job_description"
+                rows="10"
+                placeholder="Paste the job description here..."
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                Analyze Resume
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

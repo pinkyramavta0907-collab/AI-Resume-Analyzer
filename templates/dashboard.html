@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="navbar">
+
+        <div class="logo">
+            AI Resume Analyzer
+        </div>
+
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <h1>Analysis Dashboard</h1>
+
+
+    {% if analyses %}
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Resume</th>
+                    <th>Match</th>
+                    <th>Matching Skills</th>
+                    <th>Missing Skills</th>
+                    <th>Date</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for analysis in analyses %}
+
+                <tr>
+
+                    <td>
+                        {{ analysis["resume_filename"] }}
+                    </td>
+
+                    <td>
+                        {{ analysis["match_percentage"] }}%
+                    </td>
+
+                    <td>
+                        {{ analysis["matching_skills"] or "None" }}
+                    </td>
+
+                    <td>
+                        {{ analysis["missing_skills"] or "None" }}
+                    </td>
+
+                    <td>
+                        {{ analysis["created_at"] }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <section class="card">
+
+        <p>
+            No analysis has been completed yet.
+        </p>
+
+    </section>
+
+    {% endif %}
+
+</main>
+
+</body>
+
+</html>
